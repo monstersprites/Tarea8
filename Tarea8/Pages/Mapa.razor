@@ -4,13 +4,13 @@
 
 <br>
 
-<button class="btn btn-block" @onclick="buscarProvincias">Listar provincias</button>
+<button class="btn btn-block" @onclick="buscarVacunados">Listar vacunados</button>
 
 <div class="row">
     <div class="col-xl-6">
-        <RadzenGoogleMap style="height: 500px;width: 1100px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 19.0149, Lng = -70.4297 })>
+        <RadzenGoogleMap style="height: 500px;width: 1100px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 19.0149, Lng = -70.4297 }) MarkerClick=@OnMarkerClick>
             <Markers>
-                @foreach (var p in Resultados_Provincias)
+                @foreach (var p in Resultados_Vacunados)
                 {
                     <RadzenGoogleMapMarker Title="@p.NOMBRE" Label="@p.NOMBRE" Position=@(new GoogleMapPosition() { Lat = p.LATITUD, Lng = p.LONGITUD}) />
                 }
@@ -19,55 +19,90 @@
     </div>
 </div>
 
-@*<select>
-    @foreach (var p in Resultados_Provincias) {
-    <option>@p.NOMBRE</option>
-    }
-</select>*@
+@if (MostrarPersona == true)
+{
 
+    @foreach (var f in filtro)
+    {
+
+        <div class="card" style="width: 18rem;">
+            <img src="/user.png" class="card-img-top">
+            <div class="card-body">
+                <h5 class="card-title">@f.NOMBRE  @f.APELLIDO</h5>
+                <p class="card-text">Cédula: @f.CEDULA</p>
+                <p class="card-text">Fecha de nacimiento: @f.FECHA_N</p>
+                <p class="card-text">Provincia: @f.PROVINCIA</p>
+                <p class="card-text">Signo Zodiacal: @f.SIGNO</p>
+                <p class="card-text">Cantidad de dósis: @f.CANTIDAD_D</p>
+                <p class="card-text">Vacuna: @f.VACUNA</p>
+                <p class="card-text">Fecha de 1era vacuna: @f.FECHA_V1</p>
+                <p class="card-text">Fecha de 2da vacuna: @f.FECHA_V2</p>
+            </div>
+        </div>
+
+    }
+
+}
 
 @code {
 
     int zoom = 8;
-    bool showMadridMarker;
+    bool MostrarPersona;
 
-    /*void OnMapClick(GoogleMapClickEventArgs args)
+    void OnMapClick(GoogleMapClickEventArgs args)
     {
-        console.Log($"Map clicked at Lat: {args.Position.Lat}, Lng: {args.Position.Lng}");
+        //console.Log($"Map clicked at Lat: {args.Position.Lat}, Lng: {args.Position.Lng}");
     }
 
     void OnMarkerClick(RadzenGoogleMapMarker marker)
     {
-        console.Log($"Map {marker.Title} marker clicked. Marker position -> Lat: {marker.Position.Lat}, Lng: {marker.Position.Lng}");
-    }*/
+        //console.Log($"Map {marker.Title} marker clicked. Marker position -> Lat: {marker.Position.Lat}, Lng: {marker.Position.Lng}");
 
-    List<Provincias> Resultados_Provincias = new List<Provincias>();
+        //Resultados_Vacunados = Resultados_Vacunados.Where(x => x.LATITUD == marker.Position.Lat);
 
-    public void buscarProvincias()
-    {
+        filtro = Resultados_Vacunados.Where(x => x.LATITUD == marker.Position.Lat && x.LONGITUD == marker.Position.Lng).ToList();
 
-        var API = "https://app-vacuna2.herokuapp.com/api/Provinvias";
-        WebClient cliente = new WebClient();
-        var datos = cliente.DownloadString(API);
-        Resultados_Provincias = JsonConvert.DeserializeObject<List<Provincias>>(datos);
+        if (MostrarPersona == true)
+        {
+            MostrarPersona = false;
+        }
+        else
+        {
+            MostrarPersona = true;
+        }
 
     }
 
-    public class Provincias
+    List<Resultados> Resultados_Vacunados = new List<Resultados>();
+
+    List<Resultados> filtro = new List<Resultados>();
+
+    public void buscarVacunados()
     {
-        public List<int> ID { get; set; }
+
+        var API = "https://app-vacuna2.herokuapp.com/api/Vacunados_Todos";
+        WebClient cliente = new WebClient();
+        var datos = cliente.DownloadString(API);
+        Resultados_Vacunados = JsonConvert.DeserializeObject<List<Resultados>>(datos);
+
+    }
+
+    public class Resultados
+    {
+        public int ID { get; set; }
+        public string CEDULA { get; set; }
         public string NOMBRE { get; set; }
+        public string APELLIDO { get; set; }
+        public string FECHA_N { get; set; }
+        public string VACUNA { get; set; }
+        public string PROVINCIA { get; set; }
+        public string FECHA_V1 { get; set; }
+        public object FECHA_V2 { get; set; }
+        public string SIGNO { get; set; }
+        public int CANTIDAD_D { get; set; }
         public double LATITUD { get; set; }
         public double LONGITUD { get; set; }
     }
 
-    public class Persona
-    {
-        public string CEDULA { get; set; }
-        public string NOMBRE { get; set; }
-        public string APELLIDO { get; set; }
-        public string FECHA_P { get; set; }
-        public object FECHA_S { get; set; }
-    }
 
 }
