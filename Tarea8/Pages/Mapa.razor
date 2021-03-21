@@ -4,21 +4,31 @@
 
 <br>
 
+<button class="btn btn-block" @onclick="buscarProvincias">Listar provincias</button>
+
 <div class="row">
     <div class="col-xl-6">
-        <RadzenGoogleMap style="height: 400px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 42.6977, Lng = 23.3219 })>
+        <RadzenGoogleMap style="height: 500px;width: 1100px" Zoom=@zoom Center=@(new GoogleMapPosition() { Lat = 19.0149, Lng = -70.4297 })>
             <Markers>
-                <RadzenGoogleMapMarker Title="London" Label="London" Position=@(new GoogleMapPosition() { Lat = 51.5074, Lng = 0.1278 }) />
-                <RadzenGoogleMapMarker Title="Paris " Label="Paris" Position=@(new GoogleMapPosition() { Lat = 48.8566, Lng = 2.3522 }) />
+                @foreach (var p in Resultados_Provincias)
+                {
+                    <RadzenGoogleMapMarker Title="@p.NOMBRE" Label="@p.NOMBRE" Position=@(new GoogleMapPosition() { Lat = p.LATITUD, Lng = p.LONGITUD}) />
+                }
             </Markers>
         </RadzenGoogleMap>
     </div>
 </div>
 
+@*<select>
+    @foreach (var p in Resultados_Provincias) {
+    <option>@p.NOMBRE</option>
+    }
+</select>*@
+
 
 @code {
 
-    int zoom = 3;
+    int zoom = 8;
     bool showMadridMarker;
 
     /*void OnMapClick(GoogleMapClickEventArgs args)
@@ -30,5 +40,34 @@
     {
         console.Log($"Map {marker.Title} marker clicked. Marker position -> Lat: {marker.Position.Lat}, Lng: {marker.Position.Lng}");
     }*/
+
+    List<Provincias> Resultados_Provincias = new List<Provincias>();
+
+    public void buscarProvincias()
+    {
+
+        var API = "https://app-vacuna2.herokuapp.com/api/Provinvias";
+        WebClient cliente = new WebClient();
+        var datos = cliente.DownloadString(API);
+        Resultados_Provincias = JsonConvert.DeserializeObject<List<Provincias>>(datos);
+
+    }
+
+    public class Provincias
+    {
+        public List<int> ID { get; set; }
+        public string NOMBRE { get; set; }
+        public double LATITUD { get; set; }
+        public double LONGITUD { get; set; }
+    }
+
+    public class Persona
+    {
+        public string CEDULA { get; set; }
+        public string NOMBRE { get; set; }
+        public string APELLIDO { get; set; }
+        public string FECHA_P { get; set; }
+        public object FECHA_S { get; set; }
+    }
 
 }
