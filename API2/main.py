@@ -169,7 +169,7 @@ def Provinvias():
     conexion.commit()
     datos = data.fetchall()
     for i in datos:
-        a.append({"ID":[0],"NOMBRE": i[1]})
+        a.append({"ID":[0],"NOMBRE": i[1],"LATITUD":i[2],"LONGITUD":i[3]})
     return a
 
 @app.get('/api/Modificar_Pro/{nombre}/{numero}')
@@ -179,6 +179,19 @@ def Modificar_Pro(nombre: str,numero: str):
     registro.execute("UPDATE PROVINCIAS SET Nombre = '"+nombre+"' WHERE ProvinciaID= '"+numero+"' ")
     conexion.commit()
     return {"mensaje":"Actulizacion Completada Exitosamente!"}
+
+@app.get('/api/Vacunado_Provincia/{provincia}')
+def Vacunado_Provincia(provincia: str):
+    a = []
+    conexion=sqlite3.connect('app.db')
+    registro=conexion.cursor()
+    registro.execute("SELECT * FROM VACUNADO WHERE PROVINCIA = '"+provincia+"'  ")
+    conexion.commit()
+    datos = registro.fetchall()
+    for I in datos:
+        a.append({"ID":I[0],"CEDULA":I[1],"NOMBRE":I[2],"APELLIDO":I[3],"FECHA_N":I[4],"VACUNA":I[5],"SIGNO":I[9]})
+        return a
+
 
 
 
