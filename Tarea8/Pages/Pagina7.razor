@@ -138,7 +138,7 @@
         if (ProvinciaSeleccionada != "Elija su provincia" || ProvinciaSeleccionada != null)
         {
             var pos = Provincias.IndexOf(ProvinciaSeleccionada) + 1;
-            var api = $"https://api-vacuna.herokuapp.com/api/Modificar_Pro/{ProvinciaSeleccionada}/{pos}";
+            var api = $"https://app-vacuna2.herokuapp.com/api/Modificar_Pro/{ProvinciaSeleccionada}/{pos}";
             WebClient cliente = new WebClient();
             var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
             var result = JsonConvert.DeserializeObject<Result>(datos);
@@ -156,7 +156,7 @@
     {
         if (VacunaNueva != null && VacunaCantidad > 0)
         {
-            var api = $"https://api-vacuna.herokuapp.com/api/Registrar_v/{VacunaNueva}/{VacunaCantidad}";
+            var api = $"https://app-vacuna2.herokuapp.com/api/Registrar_v/{VacunaNueva}/{VacunaCantidad}";
             WebClient cliente = new WebClient();
             var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
             var result = JsonConvert.DeserializeObject<Result>(datos);
@@ -172,7 +172,7 @@
 
     public async Task GetProvincias()
     {
-        var api = $"https://api-vacuna.herokuapp.com/api/Provinvias";
+        var api = $"https://app-vacuna2.herokuapp.com/api/Provinvias";
         WebClient cliente = new WebClient();
         var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
         ProvinciasAPI = JsonConvert.DeserializeObject<Provincia[]>(datos);
@@ -180,7 +180,7 @@
 
     public async Task GetVacunas()
     {
-        var api = $"https://api-vacuna.herokuapp.com/api/Vacunas";
+        var api = $"https://app-vacuna2.herokuapp.com/api/Vacunas";
         WebClient cliente = new WebClient();
         var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
         Vacunas= JsonConvert.DeserializeObject<Vacuna[]>(datos);

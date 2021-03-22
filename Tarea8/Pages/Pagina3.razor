@@ -47,7 +47,7 @@
     protected override async Task OnInitializedAsync()
     {
 
-        var api = "https://api-vacuna.herokuapp.com/api/Provinvias";
+        var api = "https://app-vacuna2.herokuapp.com/api/Provinvias";
         WebClient cliente = new WebClient();
         var datos = await cliente.DownloadStringTaskAsync(api);
         provincias = JsonConvert.DeserializeObject<List<Root>>(datos);
@@ -61,7 +61,7 @@
     public void listadoProvincia()
     {
 
-        var api = $"https://api-vacuna.herokuapp.com/api/List_Prov/{provincia}";
+        var api = $"https://app-vacuna2.herokuapp.com/api/List_Prov/{provincia}";
         WebClient cliente = new WebClient();
         var datos = cliente.DownloadString(api);
         resultados = JsonConvert.DeserializeObject<List<Root>>(datos);

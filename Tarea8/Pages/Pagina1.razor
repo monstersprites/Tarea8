@@ -68,11 +68,11 @@
     protected override async Task OnInitializedAsync()
     {
 
-        var api1 = "https://api-vacuna.herokuapp.com/api/Provinvias";
-        var api2 = "https://api-vacuna.herokuapp.com/api/Vacunas";
+        var api1 = "https://app-vacuna2.herokuapp.com/api/Provinvias";
+        var api2 = "https://app-vacuna2.herokuapp.com/api/Vacunas";
         WebClient cliente = new WebClient();
-        var datos1 = cliente.DownloadString(api1);
-        var datos2 = cliente.DownloadString(api2);
+        var datos1 = await cliente.DownloadStringTaskAsync(api1);
+        var datos2 = await cliente.DownloadStringTaskAsync(api2);
         provincias = JsonConvert.DeserializeObject<List<Root>>(datos1);
         vacunas = JsonConvert.DeserializeObject<List<Root>>(datos2);
 
@@ -91,7 +91,7 @@
         string dia = fecha.Day.ToString();
         string mes = fecha.Month.ToString();
         string year = fecha.Year.ToString();
-        API = $"https://api-vacuna.herokuapp.com/api/Registrar_P/" + cedula + "/" + vacuna + "/" + provincia + "/" + dia + "-" + mes + "-" + year;
+        API = $"https://app-vacuna2.herokuapp.com/api/Registrar_P/" + cedula + "/" + vacuna + "/" + provincia + "/" + dia + "-" + mes + "-" + year;
         WebClient cliente = new WebClient();
         var post = cliente.DownloadString(API);
         resultado = JsonConvert.DeserializeObject<Root>(post);

@@ -42,7 +42,7 @@
 
     public void buscarFiltro()
     {
-        var api = $"https://api-vacuna.herokuapp.com/api/Consultar_V/{filtro}/{busqueda}";
+        var api = $"https://app-vacuna2.herokuapp.com/api/Consultar_V/{filtro}/{busqueda}";
         WebClient cliente = new WebClient();
         var datos = cliente.DownloadString(api);
         resultados = JsonConvert.DeserializeObject<Root>(datos);

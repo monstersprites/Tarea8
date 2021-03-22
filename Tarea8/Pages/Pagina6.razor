@@ -39,7 +39,7 @@
 
     public async Task BorrarPersona()
     {
-        var api = $"https://api-vacuna.herokuapp.com/api/Eliminar_V/{Cedula}";
+        var api = $"https://app-vacuna2.herokuapp.com/api/Eliminar_V/{Cedula}";
         WebClient cliente = new WebClient();
         var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
         Resultado = JsonConvert.DeserializeObject<Result>(datos);

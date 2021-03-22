@@ -33,7 +33,7 @@
     public void marcaVacunas()
     {
 
-        var api = "https://api-vacuna.herokuapp.com/api/List_Marca";
+        var api = "https://app-vacuna2.herokuapp.com/api/List_Marca";
         WebClient cliente = new WebClient();
         var datos = cliente.DownloadString(api);
         resultados = JsonConvert.DeserializeObject<List<Root>>(datos);

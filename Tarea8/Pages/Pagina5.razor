@@ -31,7 +31,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        var api = "https://api-vacuna.herokuapp.com/api/List_Signo";
+        var api = "https://app-vacuna2.herokuapp.com/api/List_Signo";
         WebClient cliente = new WebClient();
         var datos = await cliente.DownloadStringTaskAsync(new Uri(api));
         Vacunados = JsonConvert.DeserializeObject<List<Vacunado>>(datos);
