@@ -1,31 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daniel Lora\\Desktop\\Blazor's Apps\\Tarea8\\Tarea8.csproj": {}
+    "/home/elmer/Desktop/tareas_de_p3/Tarea8/Tarea8/Tarea8.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daniel Lora\\Desktop\\Blazor's Apps\\Tarea8\\Tarea8.csproj": {
+    "/home/elmer/Desktop/tareas_de_p3/Tarea8/Tarea8/Tarea8.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daniel Lora\\Desktop\\Blazor's Apps\\Tarea8\\Tarea8.csproj",
+        "projectUniqueName": "/home/elmer/Desktop/tareas_de_p3/Tarea8/Tarea8/Tarea8.csproj",
         "projectName": "Tarea8",
-        "projectPath": "C:\\Users\\Daniel Lora\\Desktop\\Blazor's Apps\\Tarea8\\Tarea8.csproj",
-        "packagesPath": "C:\\Users\\Daniel Lora\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daniel Lora\\Desktop\\Blazor's Apps\\Tarea8\\obj\\",
+        "projectPath": "/home/elmer/Desktop/tareas_de_p3/Tarea8/Tarea8/Tarea8.csproj",
+        "packagesPath": "/home/elmer/.nuget/packages/",
+        "outputPath": "/home/elmer/Desktop/tareas_de_p3/Tarea8/Tarea8/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Daniel Lora\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/home/elmer/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +36,17 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "Radzen.Blazor": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -55,7 +65,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/5.0.201/RuntimeIdentifierGraph.json"
         }
       }
     }
