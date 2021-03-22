@@ -63,7 +63,10 @@
 
         //Resultados_Vacunados = Resultados_Vacunados.Where(x => x.LATITUD == marker.Position.Lat);
 
-        filtro = Resultados_Vacunados.Where(x => x.LATITUD == marker.Position.Lat && x.LONGITUD == marker.Position.Lng).ToList();
+        filtro = Resultados_Vacunados.Where(
+            x => x.LATITUD == marker.Position.Lat &&
+            x.LONGITUD == marker.Position.Lng
+        ).ToList();
 
         if (MostrarPersona == true)
         {
