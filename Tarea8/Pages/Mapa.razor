@@ -15,7 +15,7 @@
             <Markers>
                 @foreach (var p in Resultados_Vacunados)
                 {
-                    <RadzenGoogleMapMarker Title="@p.NOMBRE" Label="@p.NOMBRE" Position=@(new GoogleMapPosition() { Lat = p.LATITUD, Lng = p.LONGITUD}) />
+                    <RadzenGoogleMapMarker Title="@p.NOMBRE" Label="@p.PROVINCIA" Position=@(new GoogleMapPosition() { Lat = p.LATITUD, Lng = p.LONGITUD}) />
                 }
             </Markers>
         </RadzenGoogleMap>
